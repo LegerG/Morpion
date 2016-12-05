@@ -70,7 +70,6 @@ public abstract class View extends Observable {
         gridSouth.add(new JLabel(" "), 3);
         gridSouth.add(quitter, 4);
         
-        rejouer.setFocusable(false);
          
     }
     
