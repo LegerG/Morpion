@@ -12,8 +12,6 @@ import Modele.Case;
 import Modele.Joueur;
 import View.ViewGraphique;
 import View.Commande;
-import java.awt.MenuComponent;
-import javax.swing.JLabel;
 
 
 /**
@@ -29,6 +27,7 @@ public class Controler implements Observer{
     public Controler(ViewGraphique ihm) {
         this.ihm = ihm;
         ihm.setVisible (true);
+        JCourant = joueurs.get(0);
         
     }
     
