@@ -53,7 +53,12 @@ public class Controler implements Observer{
            JCourant.getCasesCochees().add(cases.get((int)arg));
            
            if (JCourant.aGagner()){
-               
+               this.JCourant.setScore();
+               if (this.numJCourant()==0){
+                   this.ihmTexte.setScoreJ1(this.JCourant.getScore());
+               }else if (this.numJCourant()==1){
+                   
+               }
            }
            this.auJoueurSuivant();
        }
@@ -84,17 +89,21 @@ public class Controler implements Observer{
  
     }
     private void auJoueurSuivant(){
+        
+        if (this.numJCourant()==1){
+            JCourant=this.joueurs.get(0);
+        }
+        else if(this.numJCourant()==0){
+            JCourant=this.joueurs.get(1);
+        }
+    }
+    private int numJCourant(){
         int res =0;
         for (int i = 0; i < 2; i++) {
             if(JCourant==this.joueurs.get(i)){
                 res=i;
             }
         }
-        if (res==1){
-            JCourant=this.joueurs.get(0);
-        }
-        else if(res==0){
-            JCourant=this.joueurs.get(1);
-        }
+        return res;
     }
 }
