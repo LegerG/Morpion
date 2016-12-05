@@ -71,4 +71,14 @@ public class Joueur {
         
         return aGagne;
     }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public int getScore() {
+        return score;
+    }
+    
+    
 }
