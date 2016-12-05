@@ -6,14 +6,16 @@
 package View;
 
 import Modele.Joueur;
+import javax.swing.JLabel;
 
 /**
  *
  * @author valetmax
  */
 public class ViewTexte extends View {
-
+    private JLabel resultat;
     public ViewTexte() {
+        
     }
 
     
