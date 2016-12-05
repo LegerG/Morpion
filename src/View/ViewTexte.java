@@ -7,6 +7,7 @@ package View;
 
 import Modele.Joueur;
 import java.awt.BorderLayout;
+import java.awt.ComponentOrientation;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,8 +21,10 @@ import javax.swing.JTextField;
  * @author valetmax
  */
 public class ViewTexte extends View {
-    private JLabel scoreJ1 = new JLabel();
-    private JLabel scoreJ2 = new JLabel();
+    private JLabel scoreJ1 = new JLabel("69");
+    private JLabel scoreJ2 = new JLabel("69");
+    private JLabel scoreAff1 = new JLabel("Score :  ");
+    private JLabel scoreAff2 = new JLabel("Score :  ");
     private JPanel gridCenter = new JPanel(new GridLayout(2, 5));
     protected JTextField joueur1 = new JTextField();
     protected JTextField joueur2 = new JTextField();
@@ -33,19 +36,23 @@ public class ViewTexte extends View {
     public ViewTexte() {
         super();
         fenetre.add(borderPanel);
-        fenetre.setSize(400, 200);
+        fenetre.setSize(400, 150);
         borderPanel.add(gridCenter, BorderLayout.CENTER);
+        scoreAff1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+        scoreAff2.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+
+        
         
         gridCenter.add(new JLabel(" "), 0);
         gridCenter.add(new JLabel("Joueur 1 : "), 1);
         gridCenter.add(joueur1,2);
-        gridCenter.add(scoreJ1, 3);     //Label qui peut être update pour le score du Joueur 1
-        gridCenter.add(new JLabel(" "), 4);
+        gridCenter.add(scoreAff1, 3);     
+        gridCenter.add(scoreJ1, 4); //Label qui peut être update pour le score du Joueur 1
         gridCenter.add(new JLabel(" "), 5);
         gridCenter.add(new JLabel("Joueur 2 : "), 6);
         gridCenter.add(joueur2,7);
-        gridCenter.add(scoreJ2, 8);     //Label qui peut être update pour le score du Joueur 2
-        gridCenter.add(new JLabel(" "), 9);
+        gridCenter.add(scoreAff2, 8);     
+        gridCenter.add(scoreJ2, 9); //Label qui peut être update pour le score du Joueur 2
         
         borderPanel.add(gridSouth, BorderLayout.SOUTH);
         
