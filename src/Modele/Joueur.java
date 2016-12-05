@@ -32,6 +32,8 @@ public class Joueur {
     public ArrayList<Case> getCasesCochees() {
         return casesCochees;
     }
-    
+    public void resetCases(){
+        casesCochees=new ArrayList<Case>();
+    }
     
 }
