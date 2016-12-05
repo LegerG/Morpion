@@ -32,9 +32,9 @@ public abstract class View extends Observable {
     protected JPanel gridSouth = new JPanel(new GridLayout(1, 5));
     protected JTextField joueur1 = new JTextField();
     protected JTextField joueur2 = new JTextField();
-    private JButton jouer = new JButton("Jouer");
-    private JButton rejouer = new JButton("Rejouer");
-    private JButton quitter = new JButton("Quitter");
+    protected JButton jouer = new JButton("Jouer");
+    protected JButton rejouer = new JButton("Rejouer");
+    protected JButton quitter = new JButton("Quitter");
     
     
     public View() {
