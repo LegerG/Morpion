@@ -71,4 +71,10 @@ public class Joueur {
         
         return aGagne;
     }
+    public void setScore(){
+        this.score=score+1;
+    }
+    public int getScore(){
+        return score;
+    }
 }
