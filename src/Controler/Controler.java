@@ -47,15 +47,11 @@ public class Controler implements Observer{
        if (arg instanceof Integer){
            ihm.aClique((int)arg, JCourant);
            JCourant.getCasesCochees().add(cases.get((int)arg));
-           if (this.getNumJCourant()==1){
-               JCourant=this.joueurs.get(0);
-           }
-           else if(this.getNumJCourant()==0){
-               JCourant=this.joueurs.get(1);
-           }
+           
            if (JCourant.aGagner()){
-               
+               this.ihm.get
            }
+           this.auJoueurSuivant();
        }
        else if (arg==Commande.JOUER){
            reset();
@@ -83,13 +79,18 @@ public class Controler implements Observer{
         }
  
     }
-    private int getNumJCourant(){
+    private void auJoueurSuivant(){
         int res =0;
         for (int i = 0; i < 2; i++) {
             if(JCourant==this.joueurs.get(i)){
                 res=i;
             }
         }
-        return res;
+        if (res==1){
+            JCourant=this.joueurs.get(0);
+        }
+        else if(res==0){
+            JCourant=this.joueurs.get(1);
+        }
     }
 }
