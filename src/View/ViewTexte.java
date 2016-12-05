@@ -125,7 +125,12 @@ public class ViewTexte extends View {
     public JButton getQuitter() {
         return quitter;
     }
-
+    public void setScoreJ1(String text){
+        scoreJ1.setText(text);
+    }
+    public void setScoreJ2(String text){
+        scoreJ2.setText(text);
+    }
 }
     
 
