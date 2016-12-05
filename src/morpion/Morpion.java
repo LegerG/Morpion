@@ -26,6 +26,7 @@ public class Morpion {
         Controler controler = new Controler(graph, texte);
         
         graph.addObserver(controler);
+        texte.addObserver(controler);
         
     }
     

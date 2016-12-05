@@ -27,8 +27,8 @@ public class ViewTexte extends View {
     private JLabel scoreAff1 = new JLabel("Score :  ");
     private JLabel scoreAff2 = new JLabel("Score :  ");
     private JPanel gridCenter = new JPanel(new GridLayout(2, 5));
-    protected JTextField joueur1 = new JTextField();
-    protected JTextField joueur2 = new JTextField();
+    protected JTextField joueur1 = new JTextField(" ");
+    protected JTextField joueur2 = new JTextField(" ");
     protected JButton jouer = new JButton("Jouer");
     protected JButton rejouer = new JButton("Rejouer");
     protected JButton quitter = new JButton("Quitter");
@@ -68,10 +68,11 @@ public class ViewTexte extends View {
         jouer.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setChanged(); 
+				setChanged();
                                 Commande msg = Commande.JOUER;
                                 notifyObservers(msg);
                                 clearChanged();
+                                
                         }
             
             });

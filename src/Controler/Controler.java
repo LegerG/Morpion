@@ -23,7 +23,7 @@ import View.ViewTexte;
 public class Controler implements Observer{
     private ViewGraphique ihmGraphique;
     private ViewTexte ihmTexte;
-    private ArrayList<Joueur> joueurs;
+    private ArrayList<Joueur> joueurs = new ArrayList<>();
     private ArrayList<Case> cases;
     private Joueur JCourant;
 
@@ -32,20 +32,14 @@ public class Controler implements Observer{
         this.ihmTexte = ihmTexte;
         this.ihmGraphique.setVisible(true);
         this.ihmTexte.setVisible(true);
+        this.cases = new ArrayList<>();
         
-        JCourant = joueurs.get(0);
         
-        for (int i = 0; i < 9; i++) {
-            Case c = new Case(i);
-            cases.add(c);       
-        }
+        
         
         
     }
-    public void resetCasesJoueur(){
-        this.joueurs.get(0).resetCases();
-        this.joueurs.get(1).resetCases();
-    }
+   
     
     
     
@@ -68,19 +62,22 @@ public class Controler implements Observer{
                }
 
            }
-           this.auJoueurSuivant();
+           JCourant = auJoueurSuivant();
        }
-       else if (arg==Commande.JOUER){
-           resetCasesJoueur();
+       
+       else if (arg == Commande.JOUER){
            lancerPartie();
            JCourant=this.joueurs.get(0);
+           resetCasesJoueurs();
            ihmTexte.getJouer().setEnabled(true);
        }
-       else if (arg==Commande.QUITTER){
+       
+       else if (arg == Commande.QUITTER){
            ihmGraphique.fermer();
            
        }
-       else if (arg==Commande.REJOUER){
+       
+       else if (arg == Commande.REJOUER){
            
        }
     }
@@ -91,22 +88,23 @@ public class Controler implements Observer{
 
     
     private void lancerPartie(){
-        joueurs.add(new Joueur(ihmTexte.getJoueur1(), Symbole.O));
-        joueurs.add(new Joueur(ihmTexte.getJoueur2(), Symbole.X));
-        
+        Joueur j1 = new Joueur(ihmTexte.getJoueur1(), Symbole.O);
+        Joueur j2 = new Joueur(ihmTexte.getJoueur1(), Symbole.X);
+        joueurs.add(j1);
+        joueurs.add(j2);
+        JCourant = joueurs.get(0);
+        for (int i = 0; i < 9; i++) {
+            Case c = new Case(i);
+            cases.add(c);       
+        }
         ihmGraphique.setEnableButton();
         
         
  
     }
-    private void auJoueurSuivant(){
+    private Joueur auJoueurSuivant(){
         
-        if (this.numJCourant()==1){
-            JCourant=this.joueurs.get(0);
-        }
-        else if(this.numJCourant()==0){
-            JCourant=this.joueurs.get(1);
-        }
+        return joueurs.get(joueurs.indexOf(JCourant) + 1 % 2);
     }
     private int numJCourant(){
         int res =0;
@@ -116,5 +114,10 @@ public class Controler implements Observer{
             }
         }
         return res;
+    }
+    
+    public void resetCasesJoueurs(){
+        this.joueurs.get(0).resetCases();
+        this.joueurs.get(1).resetCases();
     }
 }
