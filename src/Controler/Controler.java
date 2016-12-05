@@ -53,7 +53,7 @@ public class Controler implements Observer{
            JCourant.getCasesCochees().add(cases.get((int)arg));
            
            if (JCourant.aGagner()){
-               this.ihm.get
+               
            }
            this.auJoueurSuivant();
        }
