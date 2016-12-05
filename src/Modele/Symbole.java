@@ -11,5 +11,5 @@ package Modele;
  */
 public enum Symbole {
     O,
-    x;
+    X;
 }

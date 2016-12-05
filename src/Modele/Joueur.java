@@ -19,7 +19,7 @@ public class Joueur {
     private ArrayList<Case> casesCochees;
     
     
-    Joueur (String nom,Symbole symbole) {
+    public Joueur (String nom,Symbole symbole) {
         this.nom=nom;
         this.score=0;
         this.symbole=symbole;       

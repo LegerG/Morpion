@@ -10,6 +10,7 @@ import java.util.Observable;
 import java.util.Observer;
 import Modele.Case;
 import Modele.Joueur;
+import Modele.Symbole;
 import View.ViewGraphique;
 import View.Commande;
 import View.ViewTexte;
@@ -31,7 +32,14 @@ public class Controler implements Observer{
         this.ihmTexte = ihmTexte;
         this.ihmGraphique.setVisible (true);
         this.ihmTexte.setVisible(true);
+        
         JCourant = joueurs.get(0);
+        
+        for (int i = 0; i < 9; i++) {
+            Case c = new Case(i);
+            cases.add(c);       
+        }
+        
         
     }
     public void reset(){
@@ -50,7 +58,7 @@ public class Controler implements Observer{
     public void update(Observable o, Object arg) {
        if (arg instanceof Integer){
            ihmGraphique.aClique((int)arg, JCourant);
-           JCourant.getCasesCochees().add(cases.get((int)arg));
+           JCourant.getCasesCochees().add(cases.get((int)arg - 1));
            
            if (JCourant.aGagner()){
 
@@ -86,10 +94,8 @@ public class Controler implements Observer{
 
     
     private void lancerPartie(){
-        for (int i = 0; i < 9; i++) {
-            Case c = new Case(i);
-            cases.add(c);       
-        }
+        joueurs.add(new Joueur(ihmTexte.getJoueur1(), Symbole.O));
+        joueurs.add(new Joueur(ihmTexte.getJoueur2(), Symbole.X));
  
     }
     private void auJoueurSuivant(){

@@ -139,6 +139,8 @@ public class ViewTexte extends View {
     public void setScoreJ2(String text){
         scoreJ2.setText(text);
     }
+    
+    
 }
     
 
