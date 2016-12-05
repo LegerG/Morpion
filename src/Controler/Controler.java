@@ -30,7 +30,7 @@ public class Controler implements Observer{
     public Controler(ViewGraphique ihmGraphique, ViewTexte ihmTexte) {
         this.ihmGraphique = ihmGraphique;
         this.ihmTexte = ihmTexte;
-        this.ihmGraphique.setVisible(true);
+        
         this.ihmTexte.setVisible(true);
         this.cases = new ArrayList<>();
         
@@ -48,7 +48,7 @@ public class Controler implements Observer{
     public void update(Observable o, Object arg) {
        if (arg instanceof Integer){
            ihmGraphique.aClique((int)arg, JCourant);
-           JCourant.getCasesCochees().add(cases.get((int)arg - 1));
+           JCourant.getCasesCochees().add(cases.get((int)arg));
            
            if (JCourant.aGagner()){
 
@@ -57,7 +57,8 @@ public class Controler implements Observer{
                this.JCourant.setScore();
                if (this.numJCourant()==0){
                    this.ihmTexte.setScoreJ1(String.valueOf(this.JCourant.getScore()));
-               }else if (this.numJCourant()==1){
+               }
+               else {
                    this.ihmTexte.setScoreJ2(String.valueOf(this.JCourant.getScore()));
                }
 
@@ -66,6 +67,8 @@ public class Controler implements Observer{
        }
        
        else if (arg == Commande.JOUER){
+           
+           this.ihmGraphique.setVisible(true);
            lancerPartie();
            JCourant=this.joueurs.get(0);
            resetCasesJoueurs();
@@ -74,6 +77,7 @@ public class Controler implements Observer{
        
        else if (arg == Commande.QUITTER){
            ihmGraphique.fermer();
+           ihmGraphique.reset();
            
        }
        
@@ -103,17 +107,16 @@ public class Controler implements Observer{
  
     }
     private Joueur auJoueurSuivant(){
+        int i = numJCourant();
         
-        return joueurs.get(joueurs.indexOf(JCourant) + 1 % 2);
+        i = (i + 1) % 2;
+     
+        return joueurs.get(i);
     }
+    
+    
     private int numJCourant(){
-        int res =0;
-        for (int i = 0; i < 2; i++) {
-            if(JCourant==this.joueurs.get(i)){
-                res=i;
-            }
-        }
-        return res;
+        return joueurs.lastIndexOf(JCourant);
     }
     
     public void resetCasesJoueurs(){

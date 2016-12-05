@@ -16,7 +16,7 @@ public class Joueur {
     private String nom;
     private int score;
     private Symbole symbole;
-    private ArrayList<Case> casesCochees;
+    private ArrayList<Case> casesCochees = new ArrayList<>();
     
     
     public Joueur (String nom,Symbole symbole) {
@@ -34,32 +34,34 @@ public class Joueur {
     }
     
     public void resetCases(){
-        for (Case c : casesCochees) {
-            casesCochees.remove(c);
-        }
+        casesCochees.clear();
     }
     
     
     public boolean aGagner() {
-        Case i = casesCochees.get(casesCochees.size() - 1);
+        Case c = casesCochees.get(casesCochees.size() - 1);
         boolean aGagne = false;
+        int num = c.getNumero();
         
-        
-            if (((i.getNumero() == casesCochees.get((i.getNumero() + 3) % 9).getNumero() % 3) &&
-                (i.getNumero() == casesCochees.get((i.getNumero() + 6) % 9).getNumero() % 3)) 
+        int i = 0;
+        while (i < casesCochees.size()){
+            if (((num == casesCochees.get(i).getNumero() + 3 % 9) &&
+                (num == casesCochees.get(i).getNumero() + 6 % 9)) 
                     ||
-                ((i.getNumero() == casesCochees.get((i.getNumero() + 4) % 9).getNumero() % 3) &&
-                (i.getNumero() == casesCochees.get((i.getNumero() + 8) % 9).getNumero() % 3)))
+                ((num == casesCochees.get(i).getNumero() + 4 % 9)) &&
+                (num == casesCochees.get(i).getNumero() + 8 % 9))
                 {
                     aGagne = true;
                 }
-                
+            i++;
+        }
+            
             
                 //Cette partie est surement bugué
-                for (Case c : casesCochees) {
-                    if (c.getNumero() == 1) {
+                for (Case s : casesCochees) {
+                    if (s.getNumero() == 1) {
                         for (Case d : casesCochees) {
-                            if(c.getNumero() == 2) {
+                            if(s.getNumero() == 2) {
                                 for (Case e : casesCochees) {
                                     if(e.getNumero() == 3) {
                                         aGagne = true;
@@ -93,6 +95,8 @@ public class Joueur {
                 }       
         return aGagne;
     }
+    
+    
     public void setScore(){
         this.score=score+1;
     }

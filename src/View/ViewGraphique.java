@@ -48,6 +48,7 @@ public class ViewGraphique extends View{
                         }
             
             });
+            
             button.setEnabled(false);
             buttons.add(button);
         }  
@@ -85,7 +86,9 @@ public class ViewGraphique extends View{
     }
     
     
-    
+    public void reset() {
+        new ViewGraphique();
+    }
     
     
     

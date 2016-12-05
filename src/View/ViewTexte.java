@@ -22,8 +22,8 @@ import javax.swing.JTextField;
  * @author valetmax
  */
 public class ViewTexte extends View {
-    private JLabel scoreJ1 = new JLabel("69");
-    private JLabel scoreJ2 = new JLabel("69");
+    private JLabel scoreJ1 = new JLabel("");
+    private JLabel scoreJ2 = new JLabel("");
     private JLabel scoreAff1 = new JLabel("Score :  ");
     private JLabel scoreAff2 = new JLabel("Score :  ");
     private JPanel gridCenter = new JPanel(new GridLayout(2, 5));
