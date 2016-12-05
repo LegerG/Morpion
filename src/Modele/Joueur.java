@@ -36,4 +36,25 @@ public class Joueur {
         casesCochees=new ArrayList<Case>();
     }
     
+    
+    public boolean aGagner() {
+        int i = casesCochees.get(casesCochees.size() - 1).getNumero();
+        boolean aGagne = false;
+        
+        for (Case c : casesCochees) {
+            if (((c.getNumero() % 3 == casesCochees.get((c.getNumero() + 3) % 9).getNumero() % 3) &&
+                (c.getNumero() % 3 == casesCochees.get((c.getNumero() + 6) % 9).getNumero() % 3)) 
+                    ||
+                ((c.getNumero() % 3 == casesCochees.get((c.getNumero() + 4) % 9).getNumero() % 3) &&
+                (c.getNumero() % 3 == casesCochees.get((c.getNumero() + 8) % 9).getNumero() % 3)))
+                {
+                    aGagne = true;
+                }
+            else if (c.getNumero() == 1){
+                
+            }
+        }
+        
+        return aGagne;
+    }
 }

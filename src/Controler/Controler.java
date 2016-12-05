@@ -48,7 +48,10 @@ public class Controler implements Observer{
            ihm.aClique((int)arg, JCourant);
            JCourant.getCasesCochees().add(cases.get((int)arg));
            if (this.joueurs==1){
-               JCourant=0;
+               JCourant=this.joueurs.get(0);
+           }
+           else if(this.){
+           
            }
        }
        else if (arg==Commande.JOUER){
