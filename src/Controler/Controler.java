@@ -68,7 +68,7 @@ public class Controler implements Observer{
                if (this.numJCourant()==0){
                    this.ihmTexte.setScoreJ1(String.valueOf(this.JCourant.getScore()));
                }else if (this.numJCourant()==1){
-                   
+                   this.ihmTexte.setScoreJ2(String.valueOf(this.JCourant.getScore()));
                }
 
            }
