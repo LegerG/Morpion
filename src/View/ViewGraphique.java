@@ -47,7 +47,7 @@ public class ViewGraphique extends View{
                         }
             
             });
-            
+            button.setEnabled(false);
             buttons.add(button);
         }  
     }
