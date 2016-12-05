@@ -10,6 +10,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Observable;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -70,6 +72,39 @@ public abstract class View extends Observable {
         gridSouth.add(new JLabel(" "), 3);
         gridSouth.add(quitter, 4);
         
+        
+        jouer.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setChanged(); 
+                                Commande msg = Commande.JOUER;
+                                notifyObservers(msg);
+                                clearChanged();
+                        }
+            
+            });
+        
+        rejouer.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setChanged(); 
+                                Commande msg = Commande.REJOUER;
+                                notifyObservers(msg);
+                                clearChanged();
+                        }
+            
+            });
+        
+        quitter.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setChanged(); 
+                                Commande msg = Commande.QUITTER;
+                                notifyObservers(msg);
+                                clearChanged();
+                        }
+            
+            });
          
     }
     
