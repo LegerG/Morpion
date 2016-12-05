@@ -20,7 +20,8 @@ import javax.swing.JTextField;
  * @author valetmax
  */
 public class ViewTexte extends View {
-    private JLabel resultat;
+    private JLabel scoreJ1 = new JLabel();
+    private JLabel scoreJ2 = new JLabel();
     private JPanel gridCenter = new JPanel(new GridLayout(2, 5));
     protected JTextField joueur1 = new JTextField();
     protected JTextField joueur2 = new JTextField();
@@ -32,17 +33,18 @@ public class ViewTexte extends View {
     public ViewTexte() {
         super();
         fenetre.add(borderPanel);
+        fenetre.setSize(400, 200);
         borderPanel.add(gridCenter, BorderLayout.CENTER);
         
         gridCenter.add(new JLabel(" "), 0);
         gridCenter.add(new JLabel("Joueur 1 : "), 1);
         gridCenter.add(joueur1,2);
-        gridCenter.add(new JLabel(" "), 3);     //Label qui peut être update pour le score du Joueur 1
+        gridCenter.add(scoreJ1, 3);     //Label qui peut être update pour le score du Joueur 1
         gridCenter.add(new JLabel(" "), 4);
         gridCenter.add(new JLabel(" "), 5);
         gridCenter.add(new JLabel("Joueur 2 : "), 6);
         gridCenter.add(joueur2,7);
-        gridCenter.add(new JLabel(" "), 8);     //Label qui peut être update pour le score du Joueur 2
+        gridCenter.add(scoreJ2, 8);     //Label qui peut être update pour le score du Joueur 2
         gridCenter.add(new JLabel(" "), 9);
         
         borderPanel.add(gridSouth, BorderLayout.SOUTH);
