@@ -25,13 +25,6 @@ public class ViewGraphique extends View{
     private ArrayList<JButton> buttons = new ArrayList<>();
     private JPanel gridCenter = new JPanel(new GridLayout(3, 3));
     
-    
-    public static void main(String [] args) {
-        
-        ViewGraphique viewG = new ViewGraphique();
-        viewG.setVisible(true);
-        
-    }
 
     public ViewGraphique() {
         super();
