@@ -36,7 +36,7 @@ public class Controler implements Observer{
     }
     public void reset(){
         for (int i = 0; i < 9; i++) {
-            this.ihm.getButtons().get(i).enable(true);
+            this.ihmGraphique.getButtons().get(i).enable(true);
         }
         this.joueurs.get(0).resetCases();
         this.joueurs.get(1).resetCases();
@@ -49,7 +49,7 @@ public class Controler implements Observer{
     @Override
     public void update(Observable o, Object arg) {
        if (arg instanceof Integer){
-           ihm.aClique((int)arg, JCourant);
+           ihmGraphique.aClique((int)arg, JCourant);
            JCourant.getCasesCochees().add(cases.get((int)arg));
            if (this.getNumJCourant()==1){
                JCourant=this.joueurs.get(0);
@@ -67,7 +67,7 @@ public class Controler implements Observer{
            JCourant=this.joueurs.get(0);
        }
        else if (arg==Commande.QUITTER){
-           ihm.fermer();
+           ihmGraphique.fermer();
            
        }
        else if (arg==Commande.REJOUER){

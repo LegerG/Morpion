@@ -21,9 +21,9 @@ public class Morpion {
     public static void main(String[] args) {
         // TODO code application logic here
         ViewGraphique graph = new ViewGraphique();
-        ViewTexte ViewTexte = new ViewTexte();
+        ViewTexte texte = new ViewTexte();
         
-        Controler controler = new Controler(graph);
+        Controler controler = new Controler(graph, texte);
         
         graph.addObserver(controler);
         
