@@ -6,11 +6,14 @@
 package View;
 
 import Modele.Joueur;
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -18,19 +21,31 @@ import javax.swing.JPanel;
  */
 public class ViewTexte extends View {
     private JLabel resultat;
-    private JPanel gridNorthSouth = new JPanel(new GridLayout(2, 5));
+    private JPanel gridCenter = new JPanel(new GridLayout(2, 5));
+    protected JTextField joueur1 = new JTextField();
+    protected JTextField joueur2 = new JTextField();
+    protected JButton jouer = new JButton("Jouer");
+    protected JButton rejouer = new JButton("Rejouer");
+    protected JButton quitter = new JButton("Quitter");
+    
     
     public ViewTexte() {
-        gridNorthSouth.add(new JLabel(" "), 0);
-        gridNorthSouth.add(new JLabel("Joueur 1 : "), 1);
-        gridNorthSouth.add(joueur1,2);
-        gridNorthSouth.add(new JLabel(" "), 3);     //Label qui peut être update pour le score du Joueur 1
-        gridNorthSouth.add(new JLabel(" "), 4);
-        gridNorthSouth.add(new JLabel(" "), 5);
-        gridNorthSouth.add(new JLabel("Joueur 2 : "), 6);
-        gridNorthSouth.add(joueur2,7);
-        gridNorthSouth.add(new JLabel(" "), 8);     //Label qui peut être update pour le score du Joueur 2
-        gridNorthSouth.add(new JLabel(" "), 9);
+        super();
+        fenetre.add(borderPanel);
+        borderPanel.add(gridCenter, BorderLayout.CENTER);
+        
+        gridCenter.add(new JLabel(" "), 0);
+        gridCenter.add(new JLabel("Joueur 1 : "), 1);
+        gridCenter.add(joueur1,2);
+        gridCenter.add(new JLabel(" "), 3);     //Label qui peut être update pour le score du Joueur 1
+        gridCenter.add(new JLabel(" "), 4);
+        gridCenter.add(new JLabel(" "), 5);
+        gridCenter.add(new JLabel("Joueur 2 : "), 6);
+        gridCenter.add(joueur2,7);
+        gridCenter.add(new JLabel(" "), 8);     //Label qui peut être update pour le score du Joueur 2
+        gridCenter.add(new JLabel(" "), 9);
+        
+        borderPanel.add(gridSouth, BorderLayout.SOUTH);
         
         gridSouth.add(jouer, 0);
         gridSouth.add(new JLabel(" "), 1);
@@ -80,7 +95,16 @@ public class ViewTexte extends View {
     public void aClique(int arg, Joueur jCourant) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
+    @Override
+    public String getJoueur1() {
+        return joueur1.getName();
+    }
+    
+    @Override
+    public String getJoueur2() {
+        return joueur2.getName();
+    }
 }
     
 

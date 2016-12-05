@@ -28,6 +28,7 @@ public class ViewGraphique extends View{
 
     public ViewGraphique() {
         super();
+        fenetre.setSize(700, 700);
         
         
         borderPanel.add(gridCenter, BorderLayout.CENTER) ;
@@ -65,6 +66,16 @@ public class ViewGraphique extends View{
         buttons.get(arg).setText(jCourant.getSymbole().name());
         buttons.get(arg).setEnabled(false);
         
+    }
+
+    @Override
+    public String getJoueur1() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getJoueur2() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
