@@ -96,7 +96,7 @@ public class Controler implements Observer{
     private void lancerPartie(){
         joueurs.add(new Joueur(ihmTexte.getJoueur1(), Symbole.O));
         joueurs.add(new Joueur(ihmTexte.getJoueur2(), Symbole.X));
- 
+        
     }
     private void auJoueurSuivant(){
         
