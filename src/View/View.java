@@ -64,44 +64,7 @@ public abstract class View extends Observable {
     /**
      * @return the jouer
      */
-    public JButton getJouer() {
-        return jouer;
-    }
-
-    /**
-     * @param jouer the jouer to set
-     */
-    public void setJouer(JButton jouer) {
-        this.jouer = jouer;
-    }
-
-    /**
-     * @return the rejouer
-     */
-    public JButton getRejouer() {
-        return rejouer;
-    }
-
-    /**
-     * @param rejouer the rejouer to set
-     */
-    public void setRejouer(JButton rejouer) {
-        this.rejouer = rejouer;
-    }
-
-    /**
-     * @return the quitter
-     */
-    public JButton getQuitter() {
-        return quitter;
-    }
-
-    /**
-     * @param quitter the quitter to set
-     */
-    public void setQuitter(JButton quitter) {
-        this.quitter = quitter;
-    }
+    
     
     public abstract String getJoueur1();
     

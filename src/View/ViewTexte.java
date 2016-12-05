@@ -105,6 +105,25 @@ public class ViewTexte extends View {
     public String getJoueur2() {
         return joueur2.getName();
     }
+    
+    public JButton getJouer() {
+        return jouer;
+    }
+
+    /**
+     * @return the rejouer
+     */
+    public JButton getRejouer() {
+        return rejouer;
+    }
+
+    /**
+     * @return the quitter
+     */
+    public JButton getQuitter() {
+        return quitter;
+    }
+
 }
     
 
