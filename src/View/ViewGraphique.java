@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import Controler.Controler;
 import Modele.Joueur;
 
 /**
@@ -24,7 +23,8 @@ import Modele.Joueur;
  */
 public class ViewGraphique extends View{
     private ArrayList<JButton> buttons = new ArrayList<>();
-    private JPanel gridPanel = new JPanel(new GridLayout(3, 3)) ;
+    private JPanel gridCenter = new JPanel(new GridLayout(3, 3));
+    
     
     public static void main(String [] args) {
         
@@ -37,13 +37,13 @@ public class ViewGraphique extends View{
         super();
         
         
-        borderPanel.add(gridPanel, BorderLayout.CENTER) ;
+        borderPanel.add(gridCenter, BorderLayout.CENTER) ;
         
         for (int i=1; i<=9; i++) {
             JButton button = new JButton() ;
             button.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
             button.setBackground(Color.white);
-            gridPanel.add(button);
+            gridCenter.add(button);
             button.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -57,13 +57,10 @@ public class ViewGraphique extends View{
             
             buttons.add(button);
         }  
-        
-       
-        
     }
 
     public JPanel getGridPanel() {
-        return gridPanel;
+        return gridNorth;
     }
 
     public ArrayList<JButton> getButtons() {
