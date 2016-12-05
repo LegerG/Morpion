@@ -30,6 +30,12 @@ public class Controler implements Observer{
         JCourant = joueurs.get(0);
         
     }
+    public void reset(){
+        for (int i = 0; i < 9; i++) {
+            this.ihm.getButtons().get(i).enable(true);
+        }
+        
+    }
     
     
     
@@ -38,10 +44,10 @@ public class Controler implements Observer{
     public void update(Observable o, Object arg) {
        if (arg instanceof Integer){
            ihm.aClique((int)arg, JCourant);
-           Case c = cases.get((int)arg);
-           JCourant.getCasesCochees().add(c);
+           JCourant.getCasesCochees().add(cases.get((int)arg));
        }
        else if (arg==Commande.JOUER){
+           reset();
            lancerPartie();
        }
        else if (arg==Commande.QUITTER){
