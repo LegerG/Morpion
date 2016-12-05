@@ -12,6 +12,7 @@ import Modele.Case;
 import Modele.Joueur;
 import View.ViewGraphique;
 import View.Commande;
+import View.ViewTexte;
 
 
 /**
@@ -19,14 +20,17 @@ import View.Commande;
  * @author valetmax
  */
 public class Controler implements Observer{
-    private ViewGraphique ihm;
+    private ViewGraphique ihmGraphique;
+    private ViewTexte ihmTexte;
     private ArrayList<Joueur> joueurs;
     private ArrayList<Case> cases;
     private Joueur JCourant;
 
-    public Controler(ViewGraphique ihm) {
-        this.ihm = ihm;
-        ihm.setVisible (true);
+    public Controler(ViewGraphique ihmGraphique, ViewTexte ihmTexte) {
+        this.ihmGraphique = ihmGraphique;
+        this.ihmTexte = ihmTexte;
+        this.ihmGraphique.setVisible (true);
+        this.ihmTexte.setVisible(true);
         JCourant = joueurs.get(0);
         
     }
