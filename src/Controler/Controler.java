@@ -30,7 +30,7 @@ public class Controler implements Observer{
     public Controler(ViewGraphique ihmGraphique, ViewTexte ihmTexte) {
         this.ihmGraphique = ihmGraphique;
         this.ihmTexte = ihmTexte;
-        this.ihmGraphique.setVisible (true);
+        this.ihmGraphique.setVisible(true);
         this.ihmTexte.setVisible(true);
         
         JCourant = joueurs.get(0);
@@ -42,13 +42,9 @@ public class Controler implements Observer{
         
         
     }
-    public void reset(){
-        for (int i = 0; i < 9; i++) {
-            this.ihmGraphique.getButtons().get(i).enable(true);
-        }
+    public void resetCasesJoueur(){
         this.joueurs.get(0).resetCases();
         this.joueurs.get(1).resetCases();
-        this.cases=new ArrayList<Case>();
     }
     
     
@@ -75,9 +71,10 @@ public class Controler implements Observer{
            this.auJoueurSuivant();
        }
        else if (arg==Commande.JOUER){
-           reset();
+           resetCasesJoueur();
            lancerPartie();
            JCourant=this.joueurs.get(0);
+           ihmTexte.getJouer().setEnabled(true);
        }
        else if (arg==Commande.QUITTER){
            ihmGraphique.fermer();
@@ -96,6 +93,10 @@ public class Controler implements Observer{
     private void lancerPartie(){
         joueurs.add(new Joueur(ihmTexte.getJoueur1(), Symbole.O));
         joueurs.add(new Joueur(ihmTexte.getJoueur2(), Symbole.X));
+        
+        ihmGraphique.setEnableButton();
+        
+        
  
     }
     private void auJoueurSuivant(){

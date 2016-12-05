@@ -78,6 +78,12 @@ public class ViewGraphique extends View{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    public void setEnableButton() {
+        for (JButton b : buttons) {
+            b.setEnabled(true);
+        }
+    }
+    
     
     
     
