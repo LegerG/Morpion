@@ -33,7 +33,7 @@ public class Joueur {
         return casesCochees;
     }
     public void resetCases(){
-        casesCochees=new ArrayList<Case>();
+        casesCochees.removeAll(casesCochees);
     }
     
     
