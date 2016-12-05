@@ -71,13 +71,15 @@ public class Joueur {
         
         return aGagne;
     }
+    public void setScore(){
+        this.score=score+1;
+    }
+    public int getScore(){
+        return score;
+    }
 
     public String getNom() {
         return nom;
-    }
-
-    public int getScore() {
-        return score;
     }
     
     
