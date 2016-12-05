@@ -12,6 +12,7 @@ import Modele.Case;
 import Modele.Joueur;
 import View.ViewGraphique;
 import View.Commande;
+import View.ViewTexte;
 
 
 /**
@@ -19,20 +20,23 @@ import View.Commande;
  * @author valetmax
  */
 public class Controler implements Observer{
-    private ViewGraphique ihm;
+    private ViewGraphique ihmGraphique;
+    private ViewTexte ihmTexte;
     private ArrayList<Joueur> joueurs;
     private ArrayList<Case> cases;
     private Joueur JCourant;
 
-    public Controler(ViewGraphique ihm) {
-        this.ihm = ihm;
-        ihm.setVisible (true);
+    public Controler(ViewGraphique ihmGraphique, ViewTexte ihmTexte) {
+        this.ihmGraphique = ihmGraphique;
+        this.ihmTexte = ihmTexte;
+        this.ihmGraphique.setVisible (true);
+        this.ihmTexte.setVisible(true);
         JCourant = joueurs.get(0);
         
     }
     public void reset(){
         for (int i = 0; i < 9; i++) {
-            this.ihm.getButtons().get(i).enable(true);
+            this.ihmGraphique.getButtons().get(i).enable(true);
         }
         this.joueurs.get(0).resetCases();
         this.joueurs.get(1).resetCases();
@@ -45,7 +49,7 @@ public class Controler implements Observer{
     @Override
     public void update(Observable o, Object arg) {
        if (arg instanceof Integer){
-           ihm.aClique((int)arg, JCourant);
+           ihmGraphique.aClique((int)arg, JCourant);
            JCourant.getCasesCochees().add(cases.get((int)arg));
            
            if (JCourant.aGagner()){
@@ -59,7 +63,7 @@ public class Controler implements Observer{
            JCourant=this.joueurs.get(0);
        }
        else if (arg==Commande.QUITTER){
-           ihm.fermer();
+           ihmGraphique.fermer();
            
        }
        else if (arg==Commande.REJOUER){

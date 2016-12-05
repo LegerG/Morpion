@@ -33,27 +33,41 @@ public class Joueur {
         return casesCochees;
     }
     public void resetCases(){
-        casesCochees=new ArrayList<Case>();
+        casesCochees.removeAll(casesCochees);
     }
     
     
     public boolean aGagner() {
-        int i = casesCochees.get(casesCochees.size() - 1).getNumero();
+        Case i = casesCochees.get(casesCochees.size() - 1);
         boolean aGagne = false;
         
-        for (Case c : casesCochees) {
-            if (((c.getNumero() % 3 == casesCochees.get((c.getNumero() + 3) % 9).getNumero() % 3) &&
-                (c.getNumero() % 3 == casesCochees.get((c.getNumero() + 6) % 9).getNumero() % 3)) 
+        
+            if (((i.getNumero() == casesCochees.get((i.getNumero() + 3) % 9).getNumero() % 3) &&
+                (i.getNumero() == casesCochees.get((i.getNumero() + 6) % 9).getNumero() % 3)) 
                     ||
-                ((c.getNumero() % 3 == casesCochees.get((c.getNumero() + 4) % 9).getNumero() % 3) &&
-                (c.getNumero() % 3 == casesCochees.get((c.getNumero() + 8) % 9).getNumero() % 3)))
+                ((i.getNumero() == casesCochees.get((i.getNumero() + 4) % 9).getNumero() % 3) &&
+                (i.getNumero() == casesCochees.get((i.getNumero() + 8) % 9).getNumero() % 3)))
                 {
                     aGagne = true;
                 }
-            else if (c.getNumero() == 1){
                 
-            }
-        }
+            
+                //Cette partie est surement bugué
+                for (Case c : casesCochees) {
+                    if (c.getNumero() == 1) {
+                        for (Case d : casesCochees) {
+                            if(c.getNumero() == 2) {
+                                for (Case e : casesCochees) {
+                                    if(e.getNumero() == 3) {
+                                        aGagne = true;
+                                    }
+                                }
+                            }
+                                
+                        }
+                    }
+                }
+        
         
         return aGagne;
     }
