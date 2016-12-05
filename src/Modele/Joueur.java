@@ -62,13 +62,32 @@ public class Joueur {
                                         aGagne = true;
                                     }
                                 }
-                            }
-                                
+                            }                               
                         }
                     }
-                }
-        
-        
+                    else if(c.getNumero()==4){
+                        for (Case d : casesCochees) {
+                            if(c.getNumero() == 5) {
+                                for (Case e : casesCochees) {
+                                    if(e.getNumero() == 6) {
+                                        aGagne = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else if(c.getNumero()==7){
+                        for (Case d : casesCochees) {
+                            if(c.getNumero() == 8) {
+                                for (Case e : casesCochees) {
+                                    if(e.getNumero() == 9) {
+                                        aGagne = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }       
         return aGagne;
     }
     public void setScore(){
