@@ -132,6 +132,8 @@ public abstract class View extends Observable {
         return joueur2.getName();
     }
     
-    
+    public void fermer() {
+        fenetre.dispose();
+    }
     
 }

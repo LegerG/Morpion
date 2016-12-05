@@ -45,7 +45,7 @@ public class Controler implements Observer{
            lancerPartie();
        }
        else if (arg==Commande.QUITTER){
-           
+           ihm.fermer();
        }
        else if (arg==Commande.REJOUER){
            
