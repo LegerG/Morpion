@@ -13,7 +13,7 @@ public class Case {
     private int numero;
     
     public Case (int numcase){
-        this.numero=numcase;
+        this.numero=numcase + 1;
     }
 
     public int getNumero() {

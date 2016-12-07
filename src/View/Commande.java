@@ -12,6 +12,6 @@ package View;
 public enum Commande {
     QUITTER,
     JOUER,
-    REJOUER;
+    RESET;
     
 }

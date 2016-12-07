@@ -21,7 +21,7 @@ public abstract class View extends Observable {
     protected final JFrame fenetre = new JFrame();
     protected JPanel borderPanel = new JPanel(new BorderLayout());
     protected JPanel gridNorth = new JPanel();
-    protected JPanel gridSouth = new JPanel(new GridLayout(1, 5));
+    
    
     
     

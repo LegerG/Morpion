@@ -22,16 +22,19 @@ import javax.swing.JTextField;
  * @author valetmax
  */
 public class ViewTexte extends View {
-    private JLabel scoreJ1 = new JLabel("");
-    private JLabel scoreJ2 = new JLabel("");
+    private JLabel scoreJ1 = new JLabel("0");
+    private JLabel scoreJ2 = new JLabel("0");
     private JLabel scoreAff1 = new JLabel("Score :  ");
     private JLabel scoreAff2 = new JLabel("Score :  ");
+    private JLabel message = new JLabel("");
     private JPanel gridCenter = new JPanel(new GridLayout(2, 5));
-    protected JTextField joueur1 = new JTextField(" ");
-    protected JTextField joueur2 = new JTextField(" ");
-    protected JButton jouer = new JButton("Jouer");
-    protected JButton rejouer = new JButton("Rejouer");
-    protected JButton quitter = new JButton("Quitter");
+    private JPanel gridSouth = new JPanel(new GridLayout(2, 1));
+    private JPanel gridSouthNorth = new JPanel(new GridLayout(1, 5));
+    private JTextField joueur1 = new JTextField();
+    private JTextField joueur2 = new JTextField();
+    private JButton jouer = new JButton("Jouer");
+    private JButton reset = new JButton("Reset");
+    private JButton quitter = new JButton("Quitter");
     
     
     public ViewTexte() {
@@ -56,14 +59,16 @@ public class ViewTexte extends View {
         gridCenter.add(scoreJ2, 9); //Label qui peut être update pour le score du Joueur 2
         
         borderPanel.add(gridSouth, BorderLayout.SOUTH);
+        gridSouth.add(gridSouthNorth, 0);
+        gridSouth.add(message, 1);
         
-        gridSouth.add(jouer, 0);
-        gridSouth.add(new JLabel(" "), 1);
-        gridSouth.add(rejouer, 2);
-        gridSouth.add(new JLabel(" "), 3);
-        gridSouth.add(quitter, 4);
+        gridSouthNorth.add(jouer, 0);
+        gridSouthNorth.add(new JLabel(" "), 1);
+        gridSouthNorth.add(reset, 2);
+        gridSouthNorth.add(new JLabel(" "), 3);
+        gridSouthNorth.add(quitter, 4);
         
-        rejouer.setEnabled(false);
+        reset.setEnabled(false);
         
         jouer.addActionListener(new ActionListener(){
 			@Override
@@ -77,11 +82,11 @@ public class ViewTexte extends View {
             
             });
         
-        rejouer.addActionListener(new ActionListener(){
+        reset.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setChanged(); 
-                                Commande msg = Commande.REJOUER;
+                                Commande msg = Commande.RESET;
                                 notifyObservers(msg);
                                 clearChanged();
                         }
@@ -109,12 +114,12 @@ public class ViewTexte extends View {
     
     @Override
     public String getJoueur1() {
-        return joueur1.getName();
+        return joueur1.getText();
     }
     
     @Override
     public String getJoueur2() {
-        return joueur2.getName();
+        return joueur2.getText();
     }
     
     public JButton getJouer() {
@@ -124,8 +129,8 @@ public class ViewTexte extends View {
     /**
      * @return the rejouer
      */
-    public JButton getRejouer() {
-        return rejouer;
+    public JButton getReset() {
+        return reset;
     }
 
     /**
@@ -139,6 +144,18 @@ public class ViewTexte extends View {
     }
     public void setScoreJ2(String text){
         scoreJ2.setText(text);
+    }
+
+    public void setMessage(String message) {
+        this.message.setText(message);
+    }
+    
+    public void reset() {
+        this.joueur1.setText(null);
+        this.joueur2.setText(null);
+        this.scoreJ1.setText("0");
+        this.scoreJ2.setText("0");
+        this.message.setText(null);
     }
     
     

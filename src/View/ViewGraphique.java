@@ -16,6 +16,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import Modele.Joueur;
+import java.awt.Font;
 
 /**
  *
@@ -64,6 +65,8 @@ public class ViewGraphique extends View{
 
     @Override
     public void aClique(int arg, Joueur jCourant) {
+        
+        buttons.get(arg).setFont(new Font("Calibri", Font.PLAIN, 100));
         buttons.get(arg).setText(jCourant.getSymbole().name());
         buttons.get(arg).setEnabled(false);
         
@@ -79,16 +82,20 @@ public class ViewGraphique extends View{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public void setEnableButton() {
+    public void setEnableButton(boolean bool) {
         for (JButton b : buttons) {
-            b.setEnabled(true);
+            b.setEnabled(bool);
+        }
+    }
+    
+    public void nettoie(){
+        for(JButton b: this.buttons){
+            b.setText(null);
         }
     }
     
     
-    public void reset() {
-        new ViewGraphique();
-    }
+
     
     
     

@@ -39,51 +39,30 @@ public class Joueur {
     
     
     public boolean aGagner() {
-        Case c = casesCochees.get(casesCochees.size() - 1);
         boolean aGagne = false;
-        int num = c.getNumero();
-        
-        int i = 0;
-        while (i < casesCochees.size()){
-            if (((num == casesCochees.get(i).getNumero() + 3 % 9) &&
-                (num == casesCochees.get(i).getNumero() + 6 % 9)) 
-                    ||
-                ((num == casesCochees.get(i).getNumero() + 4 % 9)) &&
-                (num == casesCochees.get(i).getNumero() + 8 % 9))
-                {
-                    aGagne = true;
-                }
-            i++;
-        }
             
             
                 //Cette partie est surement bugué
                 for (Case s : casesCochees) {
                     if (s.getNumero() == 1) {
+                        System.out.println("1");
                         for (Case d : casesCochees) {
-                            if(s.getNumero() == 2) {
+                            if(d.getNumero() == 2) {
                                 for (Case e : casesCochees) {
                                     if(e.getNumero() == 3) {
-                                        aGagne = true;
-                                    }
-                                }
-                            }                               
-                        }
-                    }
-                    else if(c.getNumero()==4){
-                        for (Case d : casesCochees) {
-                            if(c.getNumero() == 5) {
-                                for (Case e : casesCochees) {
-                                    if(e.getNumero() == 6) {
+                                        System.out.println("3");
                                         aGagne = true;
                                     }
                                 }
                             }
-                        }
-                    }
-                    else if(c.getNumero()==7){
-                        for (Case d : casesCochees) {
-                            if(c.getNumero() == 8) {
+                            else if(d.getNumero() == 4) {
+                                for (Case e : casesCochees) {
+                                    if(e.getNumero() == 7) {
+                                        aGagne = true;
+                                    }
+                                }
+                            }
+                            else if(d.getNumero() == 5) {
                                 for (Case e : casesCochees) {
                                     if(e.getNumero() == 9) {
                                         aGagne = true;
@@ -92,7 +71,61 @@ public class Joueur {
                             }
                         }
                     }
-                }       
+                    else if(s.getNumero()==4){
+                        for (Case d : casesCochees) {
+                            if(d.getNumero() == 5) {
+                                for (Case e : casesCochees) {
+                                    if(e.getNumero() == 6) {
+                                        aGagne = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else if(s.getNumero()==7){
+                        for (Case d : casesCochees) {
+                            if(d.getNumero() == 8) {
+                                for (Case e : casesCochees) {
+                                    if(e.getNumero() == 9) {
+                                        aGagne = true;
+                                    }
+                                }
+                            }
+                            else if(d.getNumero() == 5) {
+                                for (Case e : casesCochees) {
+                                    if(e.getNumero() == 3) {
+                                        System.out.println("3");
+                                        aGagne = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else if (s.getNumero() == 2) {
+                        for (Case d : casesCochees) {
+                            if(d.getNumero() == 5) {
+                                for (Case e : casesCochees) {
+                                    if(e.getNumero() == 8) {
+                                        aGagne = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else if (s.getNumero() == 3) {
+                        System.out.println("3");
+                        for (Case d : casesCochees) {
+                            if(d.getNumero() == 6) {
+                                for (Case e : casesCochees) {
+                                    if(e.getNumero() == 9) {
+                                        aGagne = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                     
         return aGagne;
     }
     

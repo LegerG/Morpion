@@ -51,7 +51,6 @@ public class Controler implements Observer{
            JCourant.getCasesCochees().add(cases.get((int)arg));
            
            if (JCourant.aGagner()){
-
                System.out.println(JCourant.getNom() + " a gagné cette partie.");
 
                this.JCourant.setScore();
@@ -61,28 +60,55 @@ public class Controler implements Observer{
                else {
                    this.ihmTexte.setScoreJ2(String.valueOf(this.JCourant.getScore()));
                }
-
+               ihmGraphique.setEnableButton(false);
+               ihmTexte.setMessage(getJCourant().getNom() + " a gagné cette partie.");
+               this.ihmTexte.getJouer().setEnabled(true);
+               this.ihmTexte.getReset().setEnabled(true);
+           }
+           else if ((joueurs.get(0).getCasesCochees().size() + joueurs.get(1).getCasesCochees().size()) == 9) {
+               this.ihmTexte.setMessage(" === Egalité === ");
+               this.ihmTexte.getJouer().setEnabled(true);
+               this.ihmTexte.getReset().setEnabled(true);
+               
            }
            JCourant = auJoueurSuivant();
+           
        }
        
        else if (arg == Commande.JOUER){
+           
+           
            
            this.ihmGraphique.setVisible(true);
            lancerPartie();
            JCourant=this.joueurs.get(0);
            resetCasesJoueurs();
            ihmTexte.getJouer().setEnabled(true);
+           this.ihmGraphique.nettoie();
+           this.ihmTexte.getJouer().setEnabled(false);
+           this.ihmTexte.getReset().setEnabled(false);
        }
        
        else if (arg == Commande.QUITTER){
+           this.ihmTexte.getJouer().setEnabled(true);
+           this.ihmTexte.getReset().setEnabled(true);
+           
+           
            ihmGraphique.fermer();
-           ihmGraphique.reset();
+           
+           
+           
            
        }
        
-       else if (arg == Commande.REJOUER){
+       else if (arg == Commande.RESET){
+           this.ihmTexte.reset();
            
+           ihmGraphique.fermer();
+           this.joueurs.clear();
+           this.cases.clear();
+           this.ihmTexte.getReset().setEnabled(false);
+           lancerPartie();
        }
     }
 
@@ -93,7 +119,7 @@ public class Controler implements Observer{
     
     private void lancerPartie(){
         Joueur j1 = new Joueur(ihmTexte.getJoueur1(), Symbole.O);
-        Joueur j2 = new Joueur(ihmTexte.getJoueur1(), Symbole.X);
+        Joueur j2 = new Joueur(ihmTexte.getJoueur2(), Symbole.X);
         joueurs.add(j1);
         joueurs.add(j2);
         JCourant = joueurs.get(0);
@@ -101,11 +127,13 @@ public class Controler implements Observer{
             Case c = new Case(i);
             cases.add(c);       
         }
-        ihmGraphique.setEnableButton();
+        ihmGraphique.setEnableButton(true);
         
         
  
     }
+    
+    
     private Joueur auJoueurSuivant(){
         int i = numJCourant();
         
