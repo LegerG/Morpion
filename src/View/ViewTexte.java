@@ -8,11 +8,13 @@ package View;
 import Modele.Joueur;
 import java.awt.BorderLayout;
 import java.awt.ComponentOrientation;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javafx.scene.control.TextArea;
 import javax.swing.JButton;
+import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -36,7 +38,8 @@ public class ViewTexte extends View {
     private JButton jouer = new JButton("Jouer");
     private JButton reset = new JButton("Reset");
     private JButton quitter = new JButton("Quitter");
-    private JScrollPane scroll = new JScrollPane(new TextArea());
+    private JEditorPane edit;
+    private JScrollPane scroll;
     
     
     public ViewTexte() {
@@ -62,7 +65,9 @@ public class ViewTexte extends View {
         
         borderPanel.add(gridSouth, BorderLayout.SOUTH);
         gridSouth.add(gridSouthNorth, 0);
-        scroll.setSize(3, 1);
+        edit = new JEditorPane();
+        scroll = new JScrollPane(edit);
+        
         gridSouth.add(scroll, 1);
         
         gridSouthNorth.add(jouer, 0);
@@ -150,7 +155,7 @@ public class ViewTexte extends View {
     }
 
     public void addMessage(String message) {
-        this.scroll.add(new JLabel(message));
+        edit.setText(edit.getText() + "\n" + message);
     }
     
     public void reset() {
@@ -158,7 +163,7 @@ public class ViewTexte extends View {
         this.joueur2.setText(null);
         this.scoreJ1.setText("0");
         this.scoreJ2.setText("0");
-        this.scroll.removeAll();
+        this.edit.setText(null);
     }
     
     
