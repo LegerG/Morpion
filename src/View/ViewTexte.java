@@ -45,7 +45,7 @@ public class ViewTexte extends View {
         scoreAff1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         scoreAff2.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 
-        
+        fenetre.setLocation(200, 400);
         
         gridCenter.add(new JLabel(" "), 0);
         gridCenter.add(new JLabel("Joueur 1 : "), 1);

@@ -7,7 +7,6 @@ package View;
 
 import Modele.Joueur;
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.util.Observable;
 import javax.swing.JFrame;
 import javax.swing.JLabel;

@@ -30,6 +30,7 @@ public class ViewGraphique extends View{
     public ViewGraphique() {
         super();
         fenetre.setSize(700, 700);
+        fenetre.setLocation(700, 200);
         
         
         borderPanel.add(gridCenter, BorderLayout.CENTER) ;
