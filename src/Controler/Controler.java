@@ -51,8 +51,6 @@ public class Controler implements Observer{
            JCourant.getCasesCochees().add(cases.get((int)arg));
            
            if (JCourant.aGagner()){
-               System.out.println(JCourant.getNom() + " a gagné cette partie.");
-
                this.JCourant.setScore();
                if (this.numJCourant()==0){
                    this.ihmTexte.setScoreJ1(String.valueOf(this.JCourant.getScore()));
@@ -61,12 +59,12 @@ public class Controler implements Observer{
                    this.ihmTexte.setScoreJ2(String.valueOf(this.JCourant.getScore()));
                }
                ihmGraphique.setEnableButton(false);
-               ihmTexte.setMessage(getJCourant().getNom() + " a gagné cette partie.");
+               ihmTexte.addMessage(getJCourant().getNom() + " a gagné cette partie.");
                this.ihmTexte.getJouer().setEnabled(true);
                this.ihmTexte.getReset().setEnabled(true);
            }
            else if ((joueurs.get(0).getCasesCochees().size() + joueurs.get(1).getCasesCochees().size()) == 9) {
-               this.ihmTexte.setMessage(" === Egalité === ");
+               this.ihmTexte.addMessage(" === Egalité === ");
                this.ihmTexte.getJouer().setEnabled(true);
                this.ihmTexte.getReset().setEnabled(true);
                
@@ -75,9 +73,7 @@ public class Controler implements Observer{
            
        }
        
-       else if (arg == Commande.JOUER){
-           
-           
+       else if (arg == Commande.JOUER){           
            
            this.ihmGraphique.setVisible(true);
            lancerPartie();

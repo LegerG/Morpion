@@ -11,9 +11,11 @@ import java.awt.ComponentOrientation;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javafx.scene.control.TextArea;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 
@@ -26,7 +28,6 @@ public class ViewTexte extends View {
     private JLabel scoreJ2 = new JLabel("0");
     private JLabel scoreAff1 = new JLabel("Score :  ");
     private JLabel scoreAff2 = new JLabel("Score :  ");
-    private JLabel message = new JLabel("");
     private JPanel gridCenter = new JPanel(new GridLayout(2, 5));
     private JPanel gridSouth = new JPanel(new GridLayout(2, 1));
     private JPanel gridSouthNorth = new JPanel(new GridLayout(1, 5));
@@ -35,6 +36,7 @@ public class ViewTexte extends View {
     private JButton jouer = new JButton("Jouer");
     private JButton reset = new JButton("Reset");
     private JButton quitter = new JButton("Quitter");
+    private JScrollPane scroll = new JScrollPane(new TextArea());
     
     
     public ViewTexte() {
@@ -60,7 +62,8 @@ public class ViewTexte extends View {
         
         borderPanel.add(gridSouth, BorderLayout.SOUTH);
         gridSouth.add(gridSouthNorth, 0);
-        gridSouth.add(message, 1);
+        scroll.setSize(3, 1);
+        gridSouth.add(scroll, 1);
         
         gridSouthNorth.add(jouer, 0);
         gridSouthNorth.add(new JLabel(" "), 1);
@@ -146,8 +149,8 @@ public class ViewTexte extends View {
         scoreJ2.setText(text);
     }
 
-    public void setMessage(String message) {
-        this.message.setText(message);
+    public void addMessage(String message) {
+        this.scroll.add(new JLabel(message));
     }
     
     public void reset() {
@@ -155,7 +158,7 @@ public class ViewTexte extends View {
         this.joueur2.setText(null);
         this.scoreJ1.setText("0");
         this.scoreJ2.setText("0");
-        this.message.setText(null);
+        this.scroll.removeAll();
     }
     
     
