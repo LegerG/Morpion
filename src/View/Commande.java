@@ -12,6 +12,7 @@ package View;
 public enum Commande {
     QUITTER,
     JOUER,
-    RESET;
+    RESET,
+    CTRL_Z;
     
 }

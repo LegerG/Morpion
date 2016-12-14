@@ -7,7 +7,11 @@ package View;
 
 import Modele.Joueur;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
 import java.util.Observable;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -33,10 +37,12 @@ public abstract class View extends Observable {
         
         borderPanel.add(gridNorth, BorderLayout.NORTH) ;
         JLabel titre = new JLabel("Morpion Du Turfu");
+        String actionKey = "CtrlZ";      
         
         gridNorth.add(titre);
         
-         
+        
+        
     }
     
     
@@ -68,4 +74,7 @@ public abstract class View extends Observable {
     public abstract String getJoueur1();
     
     public abstract String getJoueur2();
+    
+    
+    
 }

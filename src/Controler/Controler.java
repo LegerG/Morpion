@@ -106,6 +106,9 @@ public class Controler implements Observer{
            this.ihmTexte.getReset().setEnabled(false);
            lancerPartie();
        }
+       else if (arg == Commande.CTRL_Z){
+           controleZ();
+       }
     }
 
     public Joueur getJCourant() {
@@ -146,5 +149,13 @@ public class Controler implements Observer{
     public void resetCasesJoueurs(){
         this.joueurs.get(0).resetCases();
         this.joueurs.get(1).resetCases();
+    }
+    
+    public void controleZ() {
+        Joueur j = auJoueurSuivant();
+        int numCase = j.supprDerniereCase();
+        ihmGraphique.supprDerniereCase(numCase);
+        JCourant = auJoueurSuivant();
+        
     }
 }

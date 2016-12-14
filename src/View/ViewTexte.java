@@ -7,6 +7,7 @@ package View;
 
 import Modele.Joueur;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -19,7 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-
+import javax.swing.ScrollPaneConstants;
 
 /**
  *
@@ -30,28 +31,29 @@ public class ViewTexte extends View {
     private JLabel scoreJ2 = new JLabel("0");
     private JLabel scoreAff1 = new JLabel("Score :  ");
     private JLabel scoreAff2 = new JLabel("Score :  ");
-    private JPanel gridCenter = new JPanel(new GridLayout(2, 5));
+    private JPanel gridCenter = new JPanel(new GridLayout(3, 5));
     private JPanel gridSouth = new JPanel(new GridLayout(2, 1));
-    private JPanel gridSouthNorth = new JPanel(new GridLayout(1, 5));
     private JTextField joueur1 = new JTextField();
     private JTextField joueur2 = new JTextField();
     private JButton jouer = new JButton("Jouer");
     private JButton reset = new JButton("Reset");
     private JButton quitter = new JButton("Quitter");
-    private JEditorPane edit;
-    private JScrollPane scroll;
+    private JEditorPane edit = new JEditorPane();
+    private JScrollPane scroll = new JScrollPane(edit); ;
     
     
     public ViewTexte() {
         super();
+        edit.setEditable(false);
         fenetre.add(borderPanel);
-        fenetre.setSize(400, 150);
+        fenetre.setSize(400, 240);
         borderPanel.add(gridCenter, BorderLayout.CENTER);
         scoreAff1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         scoreAff2.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 
         fenetre.setLocation(200, 400);
         
+        gridCenter.setMinimumSize(new Dimension(400, 100));
         gridCenter.add(new JLabel(" "), 0);
         gridCenter.add(new JLabel("Joueur 1 : "), 1);
         gridCenter.add(joueur1,2);
@@ -62,19 +64,26 @@ public class ViewTexte extends View {
         gridCenter.add(joueur2,7);
         gridCenter.add(scoreAff2, 8);     
         gridCenter.add(scoreJ2, 9); //Label qui peut être update pour le score du Joueur 2
+        gridCenter.add(jouer, 10);
+        gridCenter.add(new JLabel(" "), 11);
+        gridCenter.add(reset, 12);
+        gridCenter.add(new JLabel(" "), 13);
+        gridCenter.add(quitter, 14);
         
-        borderPanel.add(gridSouth, BorderLayout.SOUTH);
-        gridSouth.add(gridSouthNorth, 0);
-        edit = new JEditorPane();
-        scroll = new JScrollPane(edit);
+        borderPanel.add(scroll, BorderLayout.SOUTH);
         
-        gridSouth.add(scroll, 1);
         
-        gridSouthNorth.add(jouer, 0);
-        gridSouthNorth.add(new JLabel(" "), 1);
-        gridSouthNorth.add(reset, 2);
-        gridSouthNorth.add(new JLabel(" "), 3);
-        gridSouthNorth.add(quitter, 4);
+        edit.setForeground(Color.red);
+        edit.setMinimumSize(new Dimension(400, 100));
+        edit.setPreferredSize(new Dimension(400, 100));
+        
+        scroll.setPreferredSize(new Dimension(400, 100));
+        scroll.setMinimumSize(new Dimension(400, 100));
+        scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+       
+
+        
         
         reset.setEnabled(false);
         

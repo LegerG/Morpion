@@ -17,6 +17,11 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import Modele.Joueur;
 import java.awt.Font;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
+import javax.swing.UIManager;
 
 /**
  *
@@ -45,6 +50,7 @@ public class ViewGraphique extends View{
 			public void actionPerformed(ActionEvent e) {
 				setChanged(); 
                                 int msg = getButtons().indexOf(button);
+                                UIManager.put("Button.DisabledText", Color.BLACK);
                                 notifyObservers(msg);
                                 clearChanged();
                         }
@@ -54,6 +60,11 @@ public class ViewGraphique extends View{
             button.setEnabled(false);
             buttons.add(button);
         }  
+        
+        String actionKey = "CtrlZ";      
+        Action action = new CtrlZ_ActionListener();
+        borderPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ctrl Z"), actionKey);
+        borderPanel.getActionMap().put(actionKey, action);
     }
 
     public JPanel getGridPanel() {
@@ -95,8 +106,25 @@ public class ViewGraphique extends View{
         }
     }
     
-    
+    private class CtrlZ_ActionListener extends AbstractAction {
+        CtrlZ_ActionListener() {
+            super();
+        }
+            @Override
+            public void actionPerformed(ActionEvent event) {
 
+                setChanged();
+                Commande msg = Commande.CTRL_Z;
+                notifyObservers(msg);
+                clearChanged();
+            }
+        }
+    
+    public void supprDerniereCase(int i) {
+        buttons.get(i).setEnabled(true);
+        buttons.get(i).setText(null);
+        
+    }
     
     
     
