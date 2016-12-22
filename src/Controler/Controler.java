@@ -11,6 +11,7 @@ import java.util.Observer;
 import Modele.Case;
 import Modele.Joueur;
 import Modele.Symbole;
+import Modele.Action;
 import View.ViewGraphique;
 import View.Commande;
 import View.ViewTexte;
@@ -21,11 +22,13 @@ import View.ViewTexte;
  * @author valetmax
  */
 public class Controler implements Observer{
+    
     private ViewGraphique ihmGraphique;
     private ViewTexte ihmTexte;
     private ArrayList<Joueur> joueurs = new ArrayList<>();
     private ArrayList<Case> cases;
     private Joueur JCourant;
+    private ArrayList<Action> actions = new ArrayList<>();
 
     public Controler(ViewGraphique ihmGraphique, ViewTexte ihmTexte) {
         this.ihmGraphique = ihmGraphique;
@@ -33,20 +36,16 @@ public class Controler implements Observer{
         
         this.ihmTexte.setVisible(true);
         this.cases = new ArrayList<>();
-        
-        
-        
-        
-        
     }
-   
     
     
-    
-
     @Override
     public void update(Observable o, Object arg) {
        if (arg instanceof Integer){
+           //creation d'une action qui contient un joueur et une case (celle sur laquelle il a cliqué
+           Action a = new Action(JCourant, cases.get((int)arg));
+           actions.add(a);
+           
            ihmGraphique.aClique((int)arg, JCourant);
            JCourant.getCasesCochees().add(cases.get((int)arg));
            
@@ -134,11 +133,9 @@ public class Controler implements Observer{
     
     
     private Joueur auJoueurSuivant(){
-        int i = numJCourant();
-        
-        i = (i + 1) % 2;
-     
-        return joueurs.get(i);
+        Action a = actions.get(actions.size() - 2);
+        Joueur j = a.getJoueur();
+        return j;
     }
     
     
@@ -152,10 +149,10 @@ public class Controler implements Observer{
     }
     
     public void controleZ() {
-        Joueur j = auJoueurSuivant();
-        int numCase = j.supprDerniereCase();
-        ihmGraphique.supprDerniereCase(numCase);
-        JCourant = auJoueurSuivant();
+        Action a = actions.get(actions.size() - 1); //dernière action de la liste
+        actions.remove(a);
+        
+        ihmGraphique.supprDerniereCase(a.getNumCase());
         
     }
 }
