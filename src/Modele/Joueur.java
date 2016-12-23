@@ -45,12 +45,10 @@ public class Joueur {
                 //Cette partie est surement bugué
                 for (Case s : casesCochees) {
                     if (s.getNumero() == 1) {
-                        System.out.println("1");
                         for (Case d : casesCochees) {
                             if(d.getNumero() == 2) {
                                 for (Case e : casesCochees) {
                                     if(e.getNumero() == 3) {
-                                        System.out.println("3");
                                         aGagne = true;
                                     }
                                 }
@@ -94,7 +92,6 @@ public class Joueur {
                             else if(d.getNumero() == 5) {
                                 for (Case e : casesCochees) {
                                     if(e.getNumero() == 3) {
-                                        System.out.println("3");
                                         aGagne = true;
                                     }
                                 }
@@ -113,7 +110,6 @@ public class Joueur {
                         }
                     }
                     else if (s.getNumero() == 3) {
-                        System.out.println("3");
                         for (Case d : casesCochees) {
                             if(d.getNumero() == 6) {
                                 for (Case e : casesCochees) {

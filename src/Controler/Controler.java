@@ -16,6 +16,13 @@ import View.ViewGraphique;
 import View.Commande;
 import View.ViewTexte;
 
+/*
+    Message a destination de maxime, j'ai fais une class d'action qui se compose de Joueur et de case sur laquelle il a cliqué.
+    Pour le ctrl-Z on supprime la dernièere action de la ArrayList actions (qui contient des Action).
+    Test le programme tu verras que lorsque l'on clique sur ctrl-Z la taille de actions diminue (la suppression fonctionne) mais
+    les cases de l'ihm ne sont pas mis à jour. voili voilou bonne chance.
+*/
+
 
 /**
  *
@@ -28,7 +35,9 @@ public class Controler implements Observer{
     private ArrayList<Joueur> joueurs = new ArrayList<>();
     private ArrayList<Case> cases;
     private Joueur JCourant;
+    private Joueur joueurACommancer;
     private ArrayList<Action> actions = new ArrayList<>();
+    
 
     public Controler(ViewGraphique ihmGraphique, ViewTexte ihmTexte) {
         this.ihmGraphique = ihmGraphique;
@@ -57,8 +66,8 @@ public class Controler implements Observer{
                else {
                    this.ihmTexte.setScoreJ2(String.valueOf(this.JCourant.getScore()));
                }
-               ihmGraphique.setEnableButton(false);
-               ihmTexte.addMessage(getJCourant().getNom() + " a gagné cette partie.");
+               this.ihmGraphique.setEnableButton(false);
+               this.ihmTexte.addMessage(getJCourant().getNom() + " a gagné cette partie.");
                this.ihmTexte.getJouer().setEnabled(true);
                this.ihmTexte.getReset().setEnabled(true);
            }
@@ -71,7 +80,6 @@ public class Controler implements Observer{
            JCourant = auJoueurSuivant();
            
        }
-       
        else if (arg == Commande.JOUER){           
            
            this.ihmGraphique.setVisible(true);
@@ -82,9 +90,10 @@ public class Controler implements Observer{
            this.ihmGraphique.nettoie();
            this.ihmTexte.getJouer().setEnabled(false);
            this.ihmTexte.getReset().setEnabled(false);
+           this.ihmTexte.addMessage("Vous avez lancé une partie.");
        }
-       
        else if (arg == Commande.QUITTER){
+           this.ihmTexte.addMessage("Vous avez fermé la fenêtre de jeu.");
            this.ihmTexte.getJouer().setEnabled(true);
            this.ihmTexte.getReset().setEnabled(true);
            
@@ -95,7 +104,6 @@ public class Controler implements Observer{
            
            
        }
-       
        else if (arg == Commande.RESET){
            this.ihmTexte.reset();
            
@@ -104,10 +112,15 @@ public class Controler implements Observer{
            this.cases.clear();
            this.ihmTexte.getReset().setEnabled(false);
            lancerPartie();
+           this.ihmTexte.addMessage("Réinitialisation des joueurs et de leurs scores.");
        }
        else if (arg == Commande.CTRL_Z){
            controleZ();
+           
        }
+       
+        System.out.println("actions = " + actions.size());
+       
     }
 
     public Joueur getJCourant() {
@@ -120,7 +133,7 @@ public class Controler implements Observer{
         Joueur j2 = new Joueur(ihmTexte.getJoueur2(), Symbole.X);
         joueurs.add(j1);
         joueurs.add(j2);
-        JCourant = joueurs.get(0);
+        joueurACommancer = joueurs.get(0);
         for (int i = 0; i < 9; i++) {
             Case c = new Case(i);
             cases.add(c);       
@@ -133,8 +146,13 @@ public class Controler implements Observer{
     
     
     private Joueur auJoueurSuivant(){
-        Action a = actions.get(actions.size() - 2);
-        Joueur j = a.getJoueur();
+        Joueur j;
+        if (actions.size() != 0) {
+            j = joueurs.get((joueurs.indexOf(dernierJoueurAAvoirJoue()) + 1) % 2);
+        }
+        else {
+            j = joueurACommancer;
+        }
         return j;
     }
     
@@ -149,10 +167,31 @@ public class Controler implements Observer{
     }
     
     public void controleZ() {
-        Action a = actions.get(actions.size() - 1); //dernière action de la liste
-        actions.remove(a);
+        Action a;
+
+
+        if (!actions.isEmpty()) {
+            a = actions.get(actions.size() - 1); //dernière action de la listes
+            
+            ihmGraphique.supprDerniereCase(a.getNumCase());
+            actions.remove(a);
+            this.ihmTexte.addMessage("Retour en arrière.");
+        }
+        else {
+            System.out.println("Il ne se passe rien si le plateau est vide");
+        }
         
-        ihmGraphique.supprDerniereCase(a.getNumCase());
+        
+        
+        
         
     }
+    
+    public Joueur dernierJoueurAAvoirJoue() {
+        Joueur j;
+        j = actions.get(actions.size() - 1).getJoueur();
+        
+        return j;
+    }
 }
+
