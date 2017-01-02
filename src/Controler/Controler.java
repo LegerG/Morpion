@@ -68,7 +68,7 @@ public class Controler implements Observer{
                
                
                this.ihmGraphique.setEnableButton(false);
-               this.ihmTexte.addMessage(getJCourant().getNom() + " a gagné cette partie.");
+               this.ihmTexte.addMessage(JCourant.getNom() + " a gagné cette partie.");
                this.ihmTexte.getJouer().setEnabled(true);
                this.ihmTexte.getReset().setEnabled(true);
                
