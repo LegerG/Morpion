@@ -16,18 +16,7 @@ import View.ViewGraphique;
 import View.Commande;
 import View.ViewTexte;
 
-/*
-    Message a destination de maxime, j'ai fais une class d'action qui se compose de Joueur et de case sur laquelle il a cliqué.
-    Pour le ctrl-Z on supprime la dernièere action de la ArrayList actions (qui contient des Action).
-    Test le programme tu verras que lorsque l'on clique sur ctrl-Z la taille de actions diminue (la suppression fonctionne) mais
-    les cases de l'ihm ne sont pas mis à jour. voili voilou bonne chance.
-*/
 
-
-/**
- *
- * @author valetmax
- */
 public class Controler implements Observer{
     
     private ViewGraphique ihmGraphique;
@@ -55,7 +44,9 @@ public class Controler implements Observer{
     
     @Override
     public void update(Observable o, Object arg) {
-       if (arg instanceof Integer){
+    //Cette partie permet de répondre a chaque action que les utilisateur font sur les ihm de manière approprié en appellant les fonctions associé à chaque action
+        if (arg instanceof Integer){//si on clicque sur une case
+           
            //creation d'une action qui contient un joueur et une case (celle sur laquelle il a cliqué
            Action a = new Action(JCourant, cases.get((int)arg));
            actions.add(a);
@@ -63,7 +54,7 @@ public class Controler implements Observer{
            ihmGraphique.aClique((int)arg, JCourant);
            JCourant.getCasesCochees().add(cases.get((int)arg));
            
-           if (JCourant.aGagner()){
+           if (JCourant.aGagner()){//si lorsque l'on clicque le joueur courant gagne
                this.JCourant.setScore();
                
                
@@ -91,7 +82,7 @@ public class Controler implements Observer{
            JCourant = auJoueurSuivant();
            
        }
-       else if (arg == Commande.JOUER){           
+       else if (arg == Commande.JOUER){//si on clique sur la case Jouer de l'ihm texte           
            Action a;
            lancerPartie();
            
@@ -114,7 +105,8 @@ public class Controler implements Observer{
            this.ihmTexte.getReset().setEnabled(false);
            this.ihmTexte.addMessage("Vous avez lancé une partie.");
        }
-       else if (arg == Commande.QUITTER){
+       else if (arg == Commande.QUITTER){//si on clicque sur Quitter de l'ihm texte
+       // on ferme l'ihm graphique et on attend les décision de l'utilisateur
            this.ihmTexte.addMessage("Vous avez fermé la fenêtre de jeu.");
            this.ihmTexte.getJouer().setEnabled(true);
            this.ihmTexte.getReset().setEnabled(true);
@@ -123,7 +115,8 @@ public class Controler implements Observer{
            ihmGraphique.fermer();
            
        }
-       else if (arg == Commande.RESET){
+       else if (arg == Commande.RESET){//si on clicque sur Reset de l'ihm texte
+       // supprime les joueurs existants et attend pour en creer de nouveau 
            this.ihmTexte.reset();
            
            ihmGraphique.fermer();
@@ -132,7 +125,8 @@ public class Controler implements Observer{
            lancerPartie();
            this.ihmTexte.addMessage("Réinitialisation des joueurs et de leurs scores.");
        }
-       else if (arg == Commande.CTRL_Z){
+       else if (arg == Commande.CTRL_Z){//se céclenche dès que l'on appuie sur ctrl+Z sur le clavier
+       //appelle la fonction controleZ    
            controleZ();
            
        }
@@ -147,7 +141,7 @@ public class Controler implements Observer{
     }
 
     
-    private void lancerPartie(){
+    private void lancerPartie(){//lance une partie en initialisant les paramètres néccessaire dans chacune des situations
         if (joueurs.isEmpty()) {
             Joueur j1 = new Joueur(ihmTexte.getJoueur1(), Symbole.O);
             Joueur j2 = new Joueur(ihmTexte.getJoueur2(), Symbole.X);
@@ -159,13 +153,11 @@ public class Controler implements Observer{
             joueurACommencer = changeJoueur(joueurACommencer);
         }
         
-        ihmGraphique.setEnableButton(true);
-        
-        
+        ihmGraphique.setEnableButton(true);        
  
     }
     
-    private Joueur changeJoueur(Joueur j){
+    private Joueur changeJoueur(Joueur j){//permet de savoir quel est l'autre joueur que celui passer en parametre
         
         if (actions.size() != 0) {
             j = joueurs.get((joueurs.indexOf(dernierJoueurAAvoirJoue()) + 1) % 2);
@@ -177,7 +169,7 @@ public class Controler implements Observer{
     }
     
     
-    private Joueur auJoueurSuivant(){
+    private Joueur auJoueurSuivant(){//permet de connaître le joueur de la dernière action éffectué
         Joueur j;
         if (actions.size() != 0) {
             j = joueurs.get((joueurs.indexOf(dernierJoueurAAvoirJoue()) + 1) % 2);
@@ -193,7 +185,7 @@ public class Controler implements Observer{
         return joueurs.lastIndexOf(JCourant);
     }
     
-    public void resetCasesJoueurs(){
+    public void resetCasesJoueurs(){//nettoie les cases de tous les joueurs
         this.joueurs.get(0).resetCases();
         this.joueurs.get(1).resetCases();
     }
@@ -222,7 +214,7 @@ public class Controler implements Observer{
         
     }
     
-    public Joueur dernierJoueurAAvoirJoue() {
+    public Joueur dernierJoueurAAvoirJoue() {//renvoie le dernier joueur a avoir jouer la dernière action
         Joueur j;
         j = actions.get(actions.size() - 1).getJoueur();
         

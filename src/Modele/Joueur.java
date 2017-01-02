@@ -1,16 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Modele;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author valetmax
- */
+
 public class Joueur {
     
     private String nom;
@@ -38,7 +31,7 @@ public class Joueur {
     }
     
     
-    public boolean aGagner() {
+    public boolean aGagner() {//check si le joueur a gagner ou pas
         boolean aGagne = false;
             
             
@@ -137,20 +130,9 @@ public class Joueur {
         return nom;
     }
     
-//    public int supprDerniereCase() {
-//        int i = 0;
-//        if (!casesCochees.isEmpty()) {
-//            i = casesCochees.get(casesCochees.size() - 1).getNumero();
-//            casesCochees.remove(casesCochees.size() - 1);
-//        }
-//        
-//        
-//        
-//        return i;
-//        
-//    }
+
     
-    public void supprDerniereCaseCochee() {
+    public void supprDerniereCaseCochee() {//supprime la dernière case qui a été ajouté dans la collection de case du joueur
         if (!casesCochees.isEmpty()) {
             casesCochees.remove(casesCochees.size() - 1);
         }

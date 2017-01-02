@@ -47,6 +47,7 @@ public class ViewTexte extends View {
         edit.setEditable(false);
         fenetre.add(borderPanel);
         fenetre.setSize(500, 240);
+        fenetre.setTitle("Morpion v.2.10.578.2");
         borderPanel.add(gridCenter, BorderLayout.CENTER);
         scoreAff1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         scoreAff2.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
@@ -72,7 +73,7 @@ public class ViewTexte extends View {
         
         borderPanel.add(scroll, BorderLayout.SOUTH);
         
-        
+        //Partie permettant de faire la barre de texte qui change a chaque action
         edit.setForeground(Color.red);
         edit.setMinimumSize(new Dimension(500, 100));
         edit.setPreferredSize(new Dimension(500, 100));
@@ -132,13 +133,11 @@ public class ViewTexte extends View {
     public void aClique(int arg, Joueur jCourant) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    @Override
+       
     public String getJoueur1() {
         return joueur1.getText();
     }
     
-    @Override
     public String getJoueur2() {
         return joueur2.getText();
     }
@@ -147,16 +146,12 @@ public class ViewTexte extends View {
         return jouer;
     }
 
-    /**
-     * @return the rejouer
-     */
+    
     public JButton getReset() {
         return reset;
     }
 
-    /**
-     * @return the quitter
-     */
+   
     public JButton getQuitter() {
         return quitter;
     }
@@ -172,6 +167,7 @@ public class ViewTexte extends View {
     }
     
     public void reset() {
+    //remet l'ihm texte à la situation de départ avant que l'on ai fait quoi que ce soit
         this.joueur1.setText(null);
         this.joueur2.setText(null);
         this.scoreJ1.setText("0");
