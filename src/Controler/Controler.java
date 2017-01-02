@@ -35,7 +35,7 @@ public class Controler implements Observer{
     private ArrayList<Joueur> joueurs = new ArrayList<>();
     private ArrayList<Case> cases;
     private Joueur JCourant;
-    private Joueur joueurACommancer;
+    private Joueur joueurACommencer;
     private ArrayList<Action> actions = new ArrayList<>();
     
 
@@ -45,6 +45,11 @@ public class Controler implements Observer{
         
         this.ihmTexte.setVisible(true);
         this.cases = new ArrayList<>();
+        
+        for (int i = 0; i < 9; i++) {
+            Case c = new Case(i);
+            cases.add(c);       
+        }
     }
     
     
@@ -60,16 +65,22 @@ public class Controler implements Observer{
            
            if (JCourant.aGagner()){
                this.JCourant.setScore();
+               
+               
+               
                if (this.numJCourant()==0){
                    this.ihmTexte.setScoreJ1(String.valueOf(this.JCourant.getScore()));
                }
                else {
                    this.ihmTexte.setScoreJ2(String.valueOf(this.JCourant.getScore()));
                }
+               
+               
                this.ihmGraphique.setEnableButton(false);
                this.ihmTexte.addMessage(getJCourant().getNom() + " a gagné cette partie.");
                this.ihmTexte.getJouer().setEnabled(true);
                this.ihmTexte.getReset().setEnabled(true);
+               
            }
            else if ((joueurs.get(0).getCasesCochees().size() + joueurs.get(1).getCasesCochees().size()) == 9) {
                this.ihmTexte.addMessage(" === Egalité === ");
@@ -81,12 +92,23 @@ public class Controler implements Observer{
            
        }
        else if (arg == Commande.JOUER){           
-           
-           this.ihmGraphique.setVisible(true);
+           Action a;
            lancerPartie();
-           JCourant=this.joueurs.get(0);
+           
+           if (!actions.isEmpty()) {
+               a = actions.get(actions.size() - 1);
+               actions.clear();
+               JCourant= changeJoueur(a.getJoueur());
+           }
+           else {
+               JCourant = joueurACommencer;
+           }
+           
+           
+           
            resetCasesJoueurs();
-           ihmTexte.getJouer().setEnabled(true);
+           this.ihmGraphique.setVisible(true);
+           this.ihmTexte.getJouer().setEnabled(true);
            this.ihmGraphique.nettoie();
            this.ihmTexte.getJouer().setEnabled(false);
            this.ihmTexte.getReset().setEnabled(false);
@@ -100,16 +122,12 @@ public class Controler implements Observer{
            
            ihmGraphique.fermer();
            
-           
-           
-           
        }
        else if (arg == Commande.RESET){
            this.ihmTexte.reset();
            
            ihmGraphique.fermer();
            this.joueurs.clear();
-           this.cases.clear();
            this.ihmTexte.getReset().setEnabled(false);
            lancerPartie();
            this.ihmTexte.addMessage("Réinitialisation des joueurs et de leurs scores.");
@@ -119,7 +137,8 @@ public class Controler implements Observer{
            
        }
        
-        System.out.println("actions = " + actions.size());
+        
+        
        
     }
 
@@ -129,19 +148,32 @@ public class Controler implements Observer{
 
     
     private void lancerPartie(){
-        Joueur j1 = new Joueur(ihmTexte.getJoueur1(), Symbole.O);
-        Joueur j2 = new Joueur(ihmTexte.getJoueur2(), Symbole.X);
-        joueurs.add(j1);
-        joueurs.add(j2);
-        joueurACommancer = joueurs.get(0);
-        for (int i = 0; i < 9; i++) {
-            Case c = new Case(i);
-            cases.add(c);       
+        if (joueurs.isEmpty()) {
+            Joueur j1 = new Joueur(ihmTexte.getJoueur1(), Symbole.O);
+            Joueur j2 = new Joueur(ihmTexte.getJoueur2(), Symbole.X);
+            joueurs.add(j1);
+            joueurs.add(j2);
+            joueurACommencer = j1;
         }
+        else {
+            joueurACommencer = changeJoueur(joueurACommencer);
+        }
+        
         ihmGraphique.setEnableButton(true);
         
         
  
+    }
+    
+    private Joueur changeJoueur(Joueur j){
+        
+        if (actions.size() != 0) {
+            j = joueurs.get((joueurs.indexOf(dernierJoueurAAvoirJoue()) + 1) % 2);
+        }
+        else {
+            j = joueurACommencer;
+        }
+        return j;
     }
     
     
@@ -151,7 +183,7 @@ public class Controler implements Observer{
             j = joueurs.get((joueurs.indexOf(dernierJoueurAAvoirJoue()) + 1) % 2);
         }
         else {
-            j = joueurACommancer;
+            j = joueurACommencer;
         }
         return j;
     }
@@ -170,15 +202,18 @@ public class Controler implements Observer{
         Action a;
 
 
-        if (!actions.isEmpty()) {
+        if (!actions.isEmpty() && !this.dernierJoueurAAvoirJoue().aGagner()) {
             a = actions.get(actions.size() - 1); //dernière action de la listes
-            
+            this.JCourant=this.dernierJoueurAAvoirJoue();
             ihmGraphique.supprDerniereCase(a.getNumCase());
+            
+            this.JCourant.supprDerniereCaseCochee();
             actions.remove(a);
             this.ihmTexte.addMessage("Retour en arrière.");
+            
         }
         else {
-            System.out.println("Il ne se passe rien si le plateau est vide");
+            this.ihmTexte.addMessage("Il ne se passe rien si le plateau est vide ou si un des joueurs a gagné.");
         }
         
         

@@ -46,14 +46,14 @@ public class ViewTexte extends View {
         super();
         edit.setEditable(false);
         fenetre.add(borderPanel);
-        fenetre.setSize(400, 240);
+        fenetre.setSize(500, 240);
         borderPanel.add(gridCenter, BorderLayout.CENTER);
         scoreAff1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         scoreAff2.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 
         fenetre.setLocation(200, 400);
         
-        gridCenter.setMinimumSize(new Dimension(400, 100));
+        gridCenter.setMinimumSize(new Dimension(500, 100));
         gridCenter.add(new JLabel(" "), 0);
         gridCenter.add(new JLabel("Joueur 1 : "), 1);
         gridCenter.add(joueur1,2);
@@ -74,15 +74,19 @@ public class ViewTexte extends View {
         
         
         edit.setForeground(Color.red);
-        edit.setMinimumSize(new Dimension(400, 100));
-        edit.setPreferredSize(new Dimension(400, 100));
+        edit.setMinimumSize(new Dimension(500, 100));
+        edit.setPreferredSize(new Dimension(500, 100));
         
-        scroll.setPreferredSize(new Dimension(400, 100));
-        scroll.setMinimumSize(new Dimension(400, 100));
+        scroll.setPreferredSize(new Dimension(500, 100));
+        scroll.setMinimumSize(new Dimension(500, 100));
         scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
        
-
+        this.addMessage("Règles du morpion : ");
+        this.addMessage("  1- Chaque joueur joue à tour de rôle.");
+        this.addMessage("  2- Le premier joueur à aligner 3 symboles identiques gagne la partie.");
+        this.addMessage("  3- Le joueur a commencé change à chaque début de partie. ");
+        this.addMessage("Bonne chance :)");
         
         
         reset.setEnabled(false);

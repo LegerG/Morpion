@@ -137,18 +137,24 @@ public class Joueur {
         return nom;
     }
     
-    public int supprDerniereCase() {
-        int i = 0;
+//    public int supprDerniereCase() {
+//        int i = 0;
+//        if (!casesCochees.isEmpty()) {
+//            i = casesCochees.get(casesCochees.size() - 1).getNumero();
+//            casesCochees.remove(casesCochees.size() - 1);
+//        }
+//        
+//        
+//        
+//        return i;
+//        
+//    }
+    
+    public void supprDerniereCaseCochee() {
         if (!casesCochees.isEmpty()) {
-            i = casesCochees.get(casesCochees.size() - 1).getNumero();
             casesCochees.remove(casesCochees.size() - 1);
         }
         
-        
-        
-        return i;
-        
     }
-    
     
 }

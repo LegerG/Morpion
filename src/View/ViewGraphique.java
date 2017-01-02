@@ -121,6 +121,7 @@ public class ViewGraphique extends View{
         }
     
     public void supprDerniereCase(int i) {
+        i--; 
         buttons.get(i).setEnabled(true);
         buttons.get(i).setText(null);
         
